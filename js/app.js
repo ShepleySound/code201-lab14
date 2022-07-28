@@ -8,15 +8,18 @@ const Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-    console.log(product)
     quantity = parseInt(quantity)
-    const existingItem = this.items.find(item => console.log(item.name) === product.name)
+
+    const existingItem = this.items.find(item => item.product === product)
+
     if (existingItem) {
-      console.log(existingItem)
+      console.log("item exists")
       existingItem.quantity += quantity
     } else {
+      console.log("new item")
       this.items.push(new CartItem(product, quantity)); 
     }
+    console.log(this.items)
 };
 
 Cart.prototype.saveToLocalStorage = function() {
