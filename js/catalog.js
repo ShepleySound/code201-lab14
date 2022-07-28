@@ -39,7 +39,9 @@ function addSelectedItemToCart() {
   const quantityInput = document.getElementById('quantity')
   const quantity = quantityInput.value
 
-  cart.addItem(selectedProduct, quantity)
+  // use value of Select element to grab from list of Products.
+  const productObject = Product.allProducts.find(product => product.name === selectedProduct)
+  cart.addItem(productObject, quantity)
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart

@@ -9,3 +9,8 @@ body {
 footer {
   margin-top: auto;
 }
+
+.remove-button {
+  width: 40px;
+  height: 40px;
+}
