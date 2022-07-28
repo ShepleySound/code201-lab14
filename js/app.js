@@ -7,9 +7,9 @@ const Cart = function(items) {
 };
 
 Cart.prototype.addItem = function(product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
     quantity = parseInt(quantity)
 
+    // Finding the item in the cart using the object reference.
     const existingItem = this.items.find(item => item.product === product)
 
     if (existingItem) {
@@ -19,7 +19,6 @@ Cart.prototype.addItem = function(product, quantity) {
       console.log("new item")
       this.items.push(new CartItem(product, quantity)); 
     }
-    console.log(this.items)
 };
 
 Cart.prototype.saveToLocalStorage = function() {
@@ -30,8 +29,10 @@ Cart.prototype.saveToLocalStorage = function() {
 Cart.prototype.removeItem = function(item) {
   // TODO: Fill in this instance method to remove one item from the cart.
   // Note: You will have to decide what kind of parameter to pass in here!
-  const existingItem = this.items.find(cartItem => cartItem.product === item)
-  console.log(existingItem)
+
+  // Finding the item in the cart using them product NAME as a string.
+  const itemIndex = this.items.findIndex(cartItem => cartItem.product.name === item)
+  this.items.splice(itemIndex, 1)
 };
 
 const CartItem = function(product, quantity) {
