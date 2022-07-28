@@ -8,6 +8,15 @@ const Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+    console.log(product)
+    quantity = parseInt(quantity)
+    const existingItem = this.items.find(item => console.log(item.name) === product.name)
+    if (existingItem) {
+      console.log(existingItem)
+      existingItem.quantity += quantity
+    } else {
+      this.items.push(new CartItem(product, quantity)); 
+    }
 };
 
 Cart.prototype.saveToLocalStorage = function() {
@@ -56,3 +65,5 @@ function generateCatalog() {
 
 // Initialize the app by creating the big list of products with images and names
 generateCatalog();
+
+console.log(Product.allProducts)
