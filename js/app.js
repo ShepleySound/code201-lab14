@@ -8,24 +8,30 @@ const Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-    console.log(product)
     quantity = parseInt(quantity)
-    const existingItem = this.items.find(item => console.log(item.name) === product.name)
+
+    const existingItem = this.items.find(item => item.product === product)
+
     if (existingItem) {
-      console.log(existingItem)
+      console.log("item exists")
       existingItem.quantity += quantity
     } else {
+      console.log("new item")
       this.items.push(new CartItem(product, quantity)); 
     }
+    console.log(this.items)
 };
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  localStorage.setItem('cart', JSON.stringify(this.items))
 };
 
 Cart.prototype.removeItem = function(item) {
   // TODO: Fill in this instance method to remove one item from the cart.
   // Note: You will have to decide what kind of parameter to pass in here!
+  const existingItem = this.items.find(cartItem => cartItem.product === item)
+  console.log(existingItem)
 };
 
 const CartItem = function(product, quantity) {
@@ -65,5 +71,3 @@ function generateCatalog() {
 
 // Initialize the app by creating the big list of products with images and names
 generateCatalog();
-
-console.log(Product.allProducts)
