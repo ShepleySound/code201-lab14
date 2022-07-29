@@ -10,14 +10,13 @@ Cart.prototype.addItem = function(product, quantity) {
     quantity = parseInt(quantity)
 
     // Finding the item in the cart using the object reference.
-    const existingItem = this.items.find(item => item.product === product)
-
-    if (existingItem) {
-      console.log("item exists")
-      existingItem.quantity += quantity
-    } else {
-      console.log("new item")
-      this.items.push(new CartItem(product, quantity)); 
+    const existingItem = this.items.find(item => item.product.name === product.name)
+    if (quantity > 0) {
+      if (existingItem) {
+        existingItem.quantity += quantity
+      } else {
+        this.items.push(new CartItem(product, quantity)); 
+      }
     }
 };
 
@@ -27,9 +26,6 @@ Cart.prototype.saveToLocalStorage = function() {
 };
 
 Cart.prototype.removeItem = function(item) {
-  // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
-
   // Finding the item in the cart using them product NAME as a string.
   const itemIndex = this.items.findIndex(cartItem => cartItem.product.name === item)
   this.items.splice(itemIndex, 1)
@@ -69,6 +65,15 @@ function generateCatalog() {
   new Product('assets/water-can.jpg', 'Water Can');
   new Product('assets/wine-glass.jpg', 'Wine Glass');
 }
+
+// Change location of loadCart() and cart initialization to allow for
+// data persistance between both pages.
+function loadCart() {
+  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  return new Cart(cartItems);
+}
+
+const cart = loadCart()
 
 // Initialize the app by creating the big list of products with images and names
 generateCatalog();
